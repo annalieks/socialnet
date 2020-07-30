@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -9,6 +10,8 @@ android {
         viewBinding true
         dataBinding true
     }
+
+    kotlinOptions { jvmTarget = "1.8" }
 
     defaultConfig {
         applicationId "com.example.socialnet"

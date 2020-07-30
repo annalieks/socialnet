@@ -14,6 +14,11 @@ interface JsonPlaceholderService {
     @GET("posts")
     suspend fun getPosts() : List<PostGetResponse>
 
+    @GET("posts/{postId}")
+    suspend fun getPostById(
+        @Path("postId") postId: String
+    ) : PostGetResponse
+
     @GET("users/{userId}")
     suspend fun getUserById(
         @Path("userId") userId: String
