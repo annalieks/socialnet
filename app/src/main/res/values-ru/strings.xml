@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="my_posts_empty">У вас нет сохранённых постов</string>
+    <string name="add_post">Перейти к постам</string>
+    <string name="saved_posts_title">Сохранённые посты</string>
+    <string name="posts_list_title">Все посты</string>
+</resources>

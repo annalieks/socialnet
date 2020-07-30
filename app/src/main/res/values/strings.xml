@@ -1,0 +1,11 @@
+<resources>
+    <!-- Resources that do not require translation -->
+    <string name="app_name" translatable="false">SocialNet</string>
+
+    <!-- Translatable resources -->
+    <string name="my_posts_empty" translation_description="Text that is shown on the 'My Posts' screen when no posts have been saved by user">You don\'t have any saved posts</string>
+    <string name="add_post" translation_description="Button text that prompts user to navigate to the Posts List to add posts to their empty posts list.">Go to posts</string>
+    <string name="saved_posts_title" translation_description="Title for the 'Saved posts' screen where the user can see the list of saved posts.">Saved posts</string>
+    <string name="posts_list_title" translation_description="Title for the 'All posts' screen where the user can see the list of all available posts.">All posts</string>
+
+</resources>

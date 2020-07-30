@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="socialnet_black">#de000000</color>
+    <color name="socialnet_gray_50">#fafafa</color>
+    <color name="socialnet_gray_50_a600">#99fafafa</color>
+    <color name="socialnet_blue_300">#e3f0ee</color>
+    <color name="socialnet_blue_500">#a9d8d1</color>
+    <color name="socialnet_blue_700">#005d2b</color>
+    <color name="socialnet_blue_900">#38ab9a</color>
+    <color name="socialnet_white">#deffffff</color>
+    <color name="socialnet_yellow_300">#f8f99f</color>
+    <color name="socialnet_yellow_500">#ffff63</color>
+</resources>
