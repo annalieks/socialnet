@@ -9,10 +9,14 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.socialnet.adapters.CommentAdapter
+import com.example.socialnet.adapters.PostAdapter
 import com.example.socialnet.data.Post
 import com.example.socialnet.databinding.FragmentPostDetailBinding
+import com.example.socialnet.databinding.FragmentSavedPostsBinding
 import com.example.socialnet.utilities.InjectorUtils
 import com.example.socialnet.viewmodels.PostDetailViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -57,7 +61,16 @@ class PostDetailFragment : Fragment() {
             }
         }
 
+        val commentsAdapter = CommentAdapter()
+        binding.commentsList.adapter = commentsAdapter
+
+        subscribeUi(commentsAdapter)
+
         return binding.root
+    }
+
+    private fun subscribeUi(adapter: CommentAdapter) {
+        postDetailViewModel.comments.observe(viewLifecycleOwner) { adapter.submitList(it) }
     }
 
     interface Callback {

@@ -96,6 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:textIsSelectable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -118,18 +119,24 @@
                     app:renderHtml="@{viewModel.user.name}"
                     tools:text="Post user here" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/comments_list"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:layout_marginStart="@dimen/card_side_margin"
-                    android:layout_marginEnd="@dimen/card_side_margin"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/post_user"
-                    app:spanCount="@integer/grid_columns"
-                    tools:listitem="@layout/list_item_comment"/>
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/post_user">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/comments_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:layout_marginStart="@dimen/card_side_margin"
+                        android:layout_marginEnd="@dimen/card_side_margin"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                        app:spanCount="@integer/grid_columns"
+                        android:nestedScrollingEnabled="false"
+                        tools:listitem="@layout/list_item_comment"/>
+
+                </RelativeLayout>
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"

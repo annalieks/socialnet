@@ -33,7 +33,7 @@ class SavedPostsFragment : Fragment() {
         binding.savedPostsList.adapter = adapter
 
         binding.addPost.setOnClickListener {
-            navigateToSavedPostsListPage()
+            navigateToAllPostsListPage()
         }
 
         subscribeUi(adapter, binding)
@@ -47,9 +47,9 @@ class SavedPostsFragment : Fragment() {
         }
     }
 
-    private fun navigateToSavedPostsListPage() {
+    private fun navigateToAllPostsListPage() {
         requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem =
-            SAVED_POSTS_PAGE_INDEX
+            POSTS_LIST_PAGE_INDEX
     }
 
 }
