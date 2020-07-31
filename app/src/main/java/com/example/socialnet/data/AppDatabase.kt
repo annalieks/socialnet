@@ -9,7 +9,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.socialnet.utilities.DATABASE_NAME
 
 @Database(entities = [Post::class, Comment::class, User::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun postDao(): PostDao
     abstract fun commentDao(): CommentDao

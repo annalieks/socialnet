@@ -6,27 +6,20 @@ import kotlinx.coroutines.flow.flow
 
 class JsonPlaceholderRepository(private val service: JsonPlaceholderService) {
 
-    fun getPosts(): Flow<Post> {
-        return flow {
-            service.getPosts()
-        }
+    suspend fun getPosts(): List<PostGetResponse> {
+        return service.getPosts()
     }
 
-    fun getPostById(postId: String) : Flow<Post> {
-        return flow {
-            service.getPostById(postId)
-        }
+    suspend fun getPostById(postId: String) : PostGetResponse {
+        return service.getPostById(postId)
     }
 
-    fun getCommentsByPostId(postId: String): Flow<Comment> {
-        return flow {
-            service.getPostComments(postId)
-        }
+    suspend fun getCommentsByPostId(postId: String): List<CommentGetResponse> {
+        return service.getPostComments(postId)
     }
 
-    fun getUserById(userId: String): Flow<User> {
-        return flow {
-            service.getUserById(userId)
-        }
+    suspend fun getUserById(userId: String): UserGetResponse {
+        return service.getUserById(userId)
     }
+
 }

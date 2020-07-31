@@ -7,10 +7,10 @@
         <import type="com.example.socialnet.data.Post"/>
         <variable
             name="viewModel"
-            type="com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel" />
+            type="com.example.socialnet.viewmodels.PostDetailViewModel" />
         <variable
             name="callback"
-            type="com.google.samples.apps.sunflower.PlantDetailFragment.Callback" />
+            type="com.example.socialnet.PostDetailFragment.Callback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -18,13 +18,13 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="?attr/colorSurface"
-        tools:context="com.google.samples.apps.sunflower.GardenActivity"
+        tools:context="com.example.socialnet.SavedPostsActivity"
         tools:ignore="MergeRootFrame">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/post_detail_app_bar_height"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:stateListAnimator="@animator/show_toolbar"
@@ -36,12 +36,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorSurface"
-                app:statusBarScrim="?attr/colorSurface"
                 app:collapsedTitleGravity="center"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.SocialNet.Toolbar.Text"
+                app:contentScrim="?attr/colorSurface"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{viewModel.plant.name}"
+                app:statusBarScrim="?attr/colorSurface"
                 app:titleEnabled="false"
                 app:toolbarId="@id/toolbar">
 
@@ -50,18 +49,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
-                    app:titleTextColor="?attr/colorOnSurface"
-                    app:layout_collapseMode="pin"
                     app:contentInsetStartWithNavigation="0dp"
+                    app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/ic_detail_back"
-                    app:menu="@menu/menu_plant_detail" />
+                    app:titleTextColor="?attr/colorOnSurface" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/plant_detail_scrollview"
+            android:id="@+id/post_detail_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -74,96 +72,47 @@
                 android:layout_margin="@dimen/margin_normal">
 
                 <TextView
-                    android:id="@+id/plant_detail_name"
-                    android:layout_width="0dp"
+                    android:id="@+id/post_detail_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center_horizontal"
                     android:clickable="true"
                     android:focusable="true"
-                    android:text="@{viewModel.plant.name}"
+                    android:gravity="center_horizontal"
+                    android:text="@{viewModel.post.title}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Apple" />
+                    tools:text="Post title" />
 
                 <TextView
-                    android:id="@+id/plant_watering_header"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center_horizontal"
-                    android:text="@string/watering_needs_prefix"
-                    android:textColor="?attr/colorAccent"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_detail_name" />
-
-                <TextView
-                    android:id="@+id/plant_watering"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center_horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_watering_header"
-                    app:wateringText="@{viewModel.plant.wateringInterval}"
-                    tools:text="every 7 days" />
-
-                <ImageView
-                    android:id="@+id/gallery_nav"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:clickable="true"
-                    android:contentDescription="@string/gallery_content_description"
-                    android:focusable="true"
-                    android:src="@drawable/ic_photo_library"
-                    app:isGone="@{!viewModel.hasValidUnsplashKey()}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_detail_name" />
-
-                <TextView
-                    android:id="@+id/plant_description"
+                    android:id="@+id/post_body"
                     style="?android:attr/textAppearanceMedium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
+                    android:minHeight="@dimen/post_description_min_height"
                     android:textIsSelectable="true"
-                    android:minHeight="@dimen/plant_description_min_height"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_watering"
-                    app:renderHtml="@{viewModel.plant.description}"
-                    tools:text="Details about the plant" />
+                    app:layout_constraintTop_toBottomOf="@id/post_detail_title"
+                    app:renderHtml="@{viewModel.post.body}"
+                    tools:text="Post body here" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="20dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            style="@style/Widget.MaterialComponents.FloatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> callback.add(viewModel.plant)}"
-            android:tint="@android:color/white"
-            app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
-            app:isFabGone="@{viewModel.isPlanted}"
-            app:layout_anchor="@id/appbar"
-            app:layout_anchorGravity="bottom|end"
-            app:srcCompat="@drawable/ic_plus" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

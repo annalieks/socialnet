@@ -4,9 +4,11 @@ import android.content.Context
 import com.example.socialnet.api.JsonPlaceholderService
 import com.example.socialnet.data.*
 import com.example.socialnet.viewmodels.AllPostsListViewModelFactory
+import com.example.socialnet.viewmodels.PostDetailViewModelFactory
 import com.example.socialnet.viewmodels.SavedPostsListViewModelFactory
 
 object InjectorUtils {
+
     private fun getPostRepository(context: Context): PostRepository {
         return PostRepository.getInstance(
             AppDatabase.getInstance(context.applicationContext).postDao())
@@ -33,5 +35,19 @@ object InjectorUtils {
         context: Context
     ): SavedPostsListViewModelFactory {
         return SavedPostsListViewModelFactory(getPostRepository(context))
+    }
+
+    fun providePostDetailViewModelFactory(
+        context: Context,
+        postId: String
+    ): PostDetailViewModelFactory {
+        val jsonPlaceholderRepository = JsonPlaceholderRepository(JsonPlaceholderService.create())
+        return PostDetailViewModelFactory(
+            jsonPlaceholderRepository,
+            getPostRepository(context),
+            getCommentRepository(context),
+            getUserRepository(context),
+            postId
+        )
     }
 }

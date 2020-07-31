@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import com.example.socialnet.adapters.PostAdapter
 import com.example.socialnet.data.Post
 import com.example.socialnet.databinding.FragmentAllPostsListBinding
@@ -35,10 +36,8 @@ class AllPostsListFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: PostAdapter) {
-        val posts = lifecycleScope.launch {
-            val dest = mutableListOf<Post>()
-            viewModel.getPosts().toList(dest)
-            adapter.submitList(dest)
+        viewModel.posts.observe(viewLifecycleOwner) { posts ->
+            adapter.submitList(posts)
         }
     }
 }

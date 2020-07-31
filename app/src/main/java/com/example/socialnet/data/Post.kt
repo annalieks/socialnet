@@ -1,7 +1,9 @@
 package com.example.socialnet.data
 
 import androidx.room.*
+import com.github.pozo.KotlinBuilder
 
+@KotlinBuilder
 @Entity(tableName = "posts",
     foreignKeys = [
         ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"])

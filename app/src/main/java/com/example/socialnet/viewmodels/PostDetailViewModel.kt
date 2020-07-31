@@ -1,13 +1,16 @@
 package com.example.socialnet.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.socialnet.data.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
+import com.example.socialnet.mappers.CommentMapper
+import com.example.socialnet.mappers.PostMapper
+import com.example.socialnet.mappers.UserMapper
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import org.mapstruct.factory.Mappers.getMapper
 
 class PostDetailViewModel(
     private val jsonPlaceholderRepository: JsonPlaceholderRepository,
@@ -21,15 +24,32 @@ class PostDetailViewModel(
     //private val savedComments = commentRepository.getCommentsByPostId(postId)
     //private val savedUser = userRepository.getUserByPostId(post.value.userId)
 
-    fun getPost(postId: String): Flow<Post> {
-        return jsonPlaceholderRepository.getPostById(postId)
-    }
+    private val _post = MutableLiveData<Post>()
+    private val _comments = MutableLiveData<List<Comment>>()
+    private val _user = MutableLiveData<User>()
 
-    fun getComments(postId: String): Flow<Comment> {
-        return jsonPlaceholderRepository.getCommentsByPostId(postId)
-    }
+    val post: LiveData<Post> = _post
+    val comments: LiveData<List<Comment>> = _comments
+    val user: LiveData<User> = _user
 
-    fun getUser(userId: String): Flow<User> {
-        return jsonPlaceholderRepository.getUserById(userId)
+    init {
+        val postMapper = getMapper(PostMapper::class.java)
+        val commentMapper = getMapper(CommentMapper::class.java)
+        val userMapper = getMapper(UserMapper::class.java)
+
+        val postAsync = viewModelScope.async {
+            jsonPlaceholderRepository.getPostById(postId)
+        }
+        viewModelScope.launch {
+            _comments.value = jsonPlaceholderRepository
+                .getCommentsByPostId(postId)
+                .map { commentMapper.commentGetResponseToComment(it) }
+        }
+        viewModelScope.launch {
+            _post.value = postMapper.postGetResponseToPost(postAsync.await())
+            val result = jsonPlaceholderRepository
+                .getUserById(postAsync.await().userId)
+            _user.value = userMapper.userGetResponseToUser(result)
+        }
     }
 }

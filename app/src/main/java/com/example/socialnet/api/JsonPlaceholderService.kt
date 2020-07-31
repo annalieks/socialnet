@@ -30,7 +30,7 @@ interface JsonPlaceholderService {
     ) : List<CommentGetResponse>
 
     companion object {
-        private const val BASE_URL = "https://api.unsplash.com/"
+        private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
         fun create(): JsonPlaceholderService {
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
