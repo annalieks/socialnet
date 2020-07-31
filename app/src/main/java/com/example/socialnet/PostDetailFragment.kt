@@ -41,20 +41,23 @@ class PostDetailFragment : Fragment() {
         ).apply {
             viewModel = postDetailViewModel
             lifecycleOwner = viewLifecycleOwner
+            callback = object : Callback {
+                override fun add(post: Post?) {
+                    post?.let {// TODO: save to repository
+                        //plantDetailViewModel.addPlantToGarden()
+                        // Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
+                        //   .show()
+                    }
+                }
+
             }
 
             toolbar.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
             }
+        }
 
         return binding.root
-    }
-
-    private fun hideAppBarFab(fab: FloatingActionButton) {
-        val params = fab.layoutParams as CoordinatorLayout.LayoutParams
-        val behavior = params.behavior as FloatingActionButton.Behavior
-        behavior.isAutoHideEnabled = false
-        fab.hide()
     }
 
     interface Callback {
