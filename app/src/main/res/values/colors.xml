@@ -8,6 +8,5 @@
     <color name="socialnet_blue_700">#005d2b</color>
     <color name="socialnet_blue_900">#38ab9a</color>
     <color name="socialnet_white">#deffffff</color>
-    <color name="socialnet_yellow_300">#f8f99f</color>
-    <color name="socialnet_yellow_500">#ffff63</color>
+    <color name="socialnet_yellow_500">#FFC300</color>
 </resources>
