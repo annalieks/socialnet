@@ -7,6 +7,8 @@ class PostRepository private constructor(
 
     fun getPostById(postId: String) = postDao.getPostById(postId)
 
+    suspend fun savePost(post: Post) = postDao.insert(post)
+
     companion object {
 
         // For Singleton instantiation

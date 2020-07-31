@@ -45,19 +45,19 @@ class PostDetailFragment : Fragment() {
         ).apply {
             viewModel = postDetailViewModel
             lifecycleOwner = viewLifecycleOwner
-            callback = object : Callback {
+            /*callback = object : Callback {
                 override fun add(post: Post?) {
-                    post?.let {// TODO: save to repository
-                        //plantDetailViewModel.addPlantToGarden()
-                        // Snackbar.make(root, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG)
-                        //   .show()
-                    }
-                }
+                    Snackbar.make(root, R.string.saved_post, Snackbar.LENGTH_LONG)
+                        .show()
 
-            }
+                }
+            }*/
 
             toolbar.setNavigationOnClickListener { view ->
-                view.findNavController().navigateUp()
+                run {
+                    postDetailViewModel.savePostDetails()
+                    view.findNavController().navigateUp()
+                }
             }
         }
 

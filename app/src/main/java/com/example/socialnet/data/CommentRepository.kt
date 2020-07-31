@@ -6,6 +6,8 @@ class CommentRepository private constructor(
 
     fun getCommentsByPostId(postId: String) = commentDao.getCommentsByPostId(postId)
 
+    suspend fun saveComments(comments: List<Comment>) = commentDao.insertComments(comments)
+
     companion object {
 
         // For Singleton instantiation

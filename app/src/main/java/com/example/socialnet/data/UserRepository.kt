@@ -6,6 +6,8 @@ class UserRepository private constructor(
 
     fun getUserById(userId: String) = userDao.getUserById(userId)
 
+    suspend fun saveUser(user: User) = userDao.insert(user)
+
     companion object {
 
         // For Singleton instantiation

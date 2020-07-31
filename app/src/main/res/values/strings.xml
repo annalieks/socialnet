@@ -8,6 +8,8 @@
     <string name="saved_posts_title" translation_description="Title for the 'Saved posts' screen where the user can see the list of saved posts.">Saved posts</string>
     <string name="posts_list_title" translation_description="Title for the 'All posts' screen where the user can see the list of all available posts.">All posts</string>
     <string name="post_details_title" translation_description="Title for the plant details screen where the user can see the details for a specific post.">Post details</string>
+    <string name="saved_post" translation_description="Message that user sees when opened post is saved">Post successfully saved</string>
+
 
 
 </resources>

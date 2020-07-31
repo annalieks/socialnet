@@ -5,4 +5,5 @@
     <string name="saved_posts_title">Сохранённые посты</string>
     <string name="posts_list_title">Все посты</string>
     <string name="post_details_title">Детали поста</string>
+    <string name="saved_post">Пост успешно сохранён</string>
 </resources>

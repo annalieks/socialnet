@@ -19,7 +19,7 @@ class PostDetailViewModel(
     private val userRepository: UserRepository,
     private val postId: String
 ) : ViewModel() {
-    //TODO: support offline mode
+    //TODO: support offline mode (try-catch)
     //private val savedPost = postRepository.getPostById(postId)
     //private val savedComments = commentRepository.getCommentsByPostId(postId)
     //private val savedUser = userRepository.getUserByPostId(post.value.userId)
@@ -50,6 +50,27 @@ class PostDetailViewModel(
             val result = jsonPlaceholderRepository
                 .getUserById(postAsync.await().userId)
             _user.value = userMapper.userGetResponseToUser(result)
+        }
+    }
+
+    fun savePostDetails() {
+        viewModelScope.launch {
+            val postToSave = post.value
+            postToSave?.let {
+                postRepository.savePost(postToSave)
+            }
+        }
+        viewModelScope.launch {
+            val commentsToSave = comments.value
+            commentsToSave?.let {
+                commentRepository.saveComments(commentsToSave)
+            }
+        }
+        viewModelScope.launch {
+            val userToSave = user.value
+            userToSave?.let {
+                userRepository.saveUser(userToSave)
+            }
         }
     }
 }
