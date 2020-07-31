@@ -4,11 +4,7 @@ import androidx.room.*
 import com.github.pozo.KotlinBuilder
 
 @KotlinBuilder
-@Entity(tableName = "posts",
-    foreignKeys = [
-        ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"])
-    ],
-    indices = [Index("userId")])
+@Entity(tableName = "posts")
 data class Post(
     @PrimaryKey @ColumnInfo(name = "id") val postId: String,
     val userId: String,

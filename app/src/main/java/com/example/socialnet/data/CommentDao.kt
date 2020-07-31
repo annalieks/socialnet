@@ -10,7 +10,7 @@ import androidx.room.Query
 interface CommentDao {
 
     @Query("SELECT * FROM comments WHERE postId = :postId")
-    fun getCommentsByPostId(postId: String): LiveData<List<Comment>>
+    suspend fun getCommentsByPostId(postId: String): List<Comment>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertComments(comments: List<Comment>): Void

@@ -4,7 +4,7 @@ class CommentRepository private constructor(
     private val commentDao: CommentDao
 ) {
 
-    fun getCommentsByPostId(postId: String) = commentDao.getCommentsByPostId(postId)
+    suspend fun getCommentsByPostId(postId: String) = commentDao.getCommentsByPostId(postId)
 
     suspend fun saveComments(comments: List<Comment>) = commentDao.insertComments(comments)
 

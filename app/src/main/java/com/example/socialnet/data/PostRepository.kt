@@ -5,7 +5,9 @@ class PostRepository private constructor(
 ) {
     fun getAllPosts() = postDao.getAllPosts()
 
-    fun getPostById(postId: String) = postDao.getPostById(postId)
+    suspend fun getAllPostsAsync() = postDao.getAllPostsAsync()
+
+    suspend fun getPostById(postId: String) = postDao.getPostById(postId)
 
     suspend fun savePost(post: Post) = postDao.insert(post)
 

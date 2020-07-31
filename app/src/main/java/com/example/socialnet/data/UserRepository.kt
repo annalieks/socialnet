@@ -4,7 +4,7 @@ class UserRepository private constructor(
     private val userDao: UserDao
 ){
 
-    fun getUserById(userId: String) = userDao.getUserById(userId)
+    suspend fun getUserById(userId: String) = userDao.getUserById(userId)
 
     suspend fun saveUser(user: User) = userDao.insert(user)
 

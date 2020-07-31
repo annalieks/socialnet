@@ -28,7 +28,7 @@ object InjectorUtils {
         context: Context
     ): AllPostsListViewModelFactory {
         val repository = JsonPlaceholderRepository(JsonPlaceholderService.create())
-        return AllPostsListViewModelFactory(repository)
+        return AllPostsListViewModelFactory(repository, getPostRepository(context))
     }
 
     fun provideSavedPostsListViewModelFactory(

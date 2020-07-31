@@ -13,8 +13,11 @@ interface PostDao {
     @Query("SELECT * FROM posts")
     fun getAllPosts(): LiveData<List<Post>>
 
+    @Query("SELECT * FROM posts")
+    suspend fun getAllPostsAsync(): List<Post>
+
     @Query("SELECT * FROM posts WHERE id = :postId LIMIT 1")
-    fun getPostById(postId: String): LiveData<Post>
+    suspend fun getPostById(postId: String): Post
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(post: Post): Long

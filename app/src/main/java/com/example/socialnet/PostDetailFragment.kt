@@ -45,13 +45,6 @@ class PostDetailFragment : Fragment() {
         ).apply {
             viewModel = postDetailViewModel
             lifecycleOwner = viewLifecycleOwner
-            /*callback = object : Callback {
-                override fun add(post: Post?) {
-                    Snackbar.make(root, R.string.saved_post, Snackbar.LENGTH_LONG)
-                        .show()
-
-                }
-            }*/
 
             toolbar.setNavigationOnClickListener { view ->
                 run {
