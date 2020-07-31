@@ -73,7 +73,7 @@
 
                 <TextView
                     android:id="@+id/post_detail_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
@@ -83,6 +83,7 @@
                     android:text="@{viewModel.post.title}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="wrap"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -91,17 +92,31 @@
                 <TextView
                     android:id="@+id/post_body"
                     style="?android:attr/textAppearanceMedium"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_small"
-                    android:minHeight="@dimen/post_description_min_height"
                     android:textIsSelectable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/post_detail_title"
                     app:renderHtml="@{viewModel.post.body}"
                     tools:text="Post body here" />
+
+                <TextView
+                    android:id="@+id/post_user"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:textIsSelectable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_body"
+                    app:renderHtml="@{viewModel.user.name}"
+                    tools:text="Post user here" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
