@@ -118,6 +118,19 @@
                     app:renderHtml="@{viewModel.user.name}"
                     tools:text="Post user here" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:layout_marginStart="@dimen/card_side_margin"
+                    android:layout_marginEnd="@dimen/card_side_margin"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/post_user"
+                    app:spanCount="@integer/grid_columns"
+                    tools:listitem="@layout/list_item_comment"/>
+
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
                     android:layout_width="wrap_content"
